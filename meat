@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+PROGRAM=$(basename $0)
+
+sub_help() {
+	cat <<HELP_USAGE
+Usage: $PROGRAM <subcommand> [options]
+Subcommands:
+	find_replace_filenames (frf) Replace all occurrences of the search string in files with the replacement string.
+
+For help with each subcommand run:
+$PROGRAM <subcommand> -h|--help
+HELP_USAGE
+}
+
+source ./bin/find_replace_filenames
+
+subcommand=$1
+case $subcommand in
+"" | "-h" | "--help")
+	sub_help
+	;;
+*)
+	shift
+	(sub_${subcommand} $@) 2>/dev/null
+	if [ $? = 127 ]; then
+		cat <<HELP_ERROR
+Error: '$subcommand' is not a known subcommand.
+	Run '$PROGRAM --help' for a list of known subcommands.
+HELP_ERROR
+		exit 1
+	fi
+	;;
+esac
