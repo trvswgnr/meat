@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+
+##
+# Find & Replace Filenames
+#
+# @description Replace all occurrences of the search string in files with the replacement string.
+# @author Travis Aaron Wagner <travis@travisaw.com>
+##
+
+sub_find_replace_filenames() {
+	if [ -z $1 ] || [ -z $2 ]; then
+		cat <<HELP_USAGE
+usage: $subcommand <search> <replace> <files: *>
+<search> The value being searched for, otherwise known as the needle.
+<replace> The replacement value that replaces found search values.
+<files> (Optional) filenames to change, e.g. myfile*.js. The default is all files in current folder.
+HELP_USAGE
+		exit 1
+	fi
+
+	(
+		[[ -z $3 ]] && files="*" || files="${@:3}"
+		search=$1
+		replace=$2
+		i=0
+		for f in $files; do
+			if [ ! -f $f ]; then echo continue; fi # make sure the file exists.
+			old=$f
+			new=${f/$search/$replace}
+			mv -- "$old" "$new"
+			if [ "$old" != "$new" ]; then
+				printf '%s %s %s\n' "$old" "=>" "$new"
+				((i++))
+			fi
+		done
+		if [ $i -lt 1 ]; then
+			echo 'No changes made.'
+		fi
+	) | column -t
+}
+
+sub_frf() {
+	sub_find_replace_filenames
+}
