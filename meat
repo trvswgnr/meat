@@ -1,19 +1,27 @@
 #!/usr/bin/env bash
 
 PROGRAM=$(basename $0)
+MEAT_DIR=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
 
 sub_help() {
 	cat <<HELP_USAGE
+
+*** MEAT ***
+
 Usage: $PROGRAM <subcommand> [options]
+
 Subcommands:
-	find_replace_filenames (frf) Replace all occurrences of the search string in files with the replacement string.
+	find_replace_filenames - Replace all occurrences of the search string in files with the replacement string.
+
+Aliases:
+	frf - find_replace_filenames
 
 For help with each subcommand run:
 $PROGRAM <subcommand> -h|--help
 HELP_USAGE
 }
 
-source ./bin/find_replace_filenames
+source "$MEAT_DIR/bin/find_replace_filenames"
 
 subcommand=$1
 case $subcommand in
