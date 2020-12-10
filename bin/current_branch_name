@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+##
+# Get the current branch name in Git
+#
+# @author Travis Aaron Wagner <travis@travisaw.com>
+##
+
+sub_current_branch_name() {
+	PREFIX=' ('
+	SUFFIX=")"
+	git rev-parse --abbrev-ref HEAD > /dev/null 2>&1
+	if [ $? -eq 0 ]; then
+		NAME="$PREFIX$(git rev-parse --abbrev-ref HEAD)$SUFFIX"
+	else
+		NAME=""
+	fi
+	printf '%s' "$NAME";
+}

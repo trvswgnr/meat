@@ -21,7 +21,9 @@ $PROGRAM <subcommand> -h|--help
 HELP_USAGE
 }
 
+# subcommand files
 source "$MEAT_DIR/bin/find_replace_filenames"
+source "$MEAT_DIR/bin/current_branch_name"
 
 subcommand=$1
 case $subcommand in
