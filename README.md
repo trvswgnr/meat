@@ -1,3 +1,4 @@
+<a href="https://pugjs.org"><img src="logo.svg?raw=true" height="200" align="right"></a>
 # Meat
 ## Meat is a no-nonsense library for Bash
 
