@@ -1,7 +1,7 @@
 # Meat
 ## Meat is a no-nonsense library for Bash
 
-![Meat Logo](logo.svg "Meat Logo")
+![Meat Logo](logo.svg?raw=true "Meat Logo")
 
 ### Installation
 Clone this repo and add `/meat` to your $PATH in .bash_profile, .bashrc, etc...
